@@ -4,6 +4,7 @@ package spring.fiipractic.demo.Services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import spring.fiipractic.demo.Repositories.ClientRepository;
+import spring.fiipractic.demo.Repositories.RentalRepository;
 import spring.fiipractic.demo.models.Client;
 import spring.fiipractic.demo.models.ComicBook;
 
@@ -14,6 +15,8 @@ import java.util.stream.Collectors;
 public class ClientService {
 @Autowired
     ClientRepository clientRepository;
+@Autowired
+    RentalRepository rentalRepository;
 
     public List<Client> getAllClients() {
     return   clientRepository.findAll()
@@ -52,6 +55,9 @@ public class ClientService {
     public void deleteClient(Integer id) throws Exception {
         try{
             clientRepository.deleteById(id);
+           /* rentalRepository.findAll().stream()
+                    .filter(rental -> rental.getClientId() == id)
+                    .forEach(rental -> rentalRepository.delete(rental));*/
         }
         catch(Exception e)
         {

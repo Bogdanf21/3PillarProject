@@ -4,6 +4,7 @@ package spring.fiipractic.demo.Services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import spring.fiipractic.demo.Repositories.BookRepository;
+import spring.fiipractic.demo.Repositories.RentalRepository;
 import spring.fiipractic.demo.models.Book;
 
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ public class BookService {
 
     @Autowired
     BookRepository bookRepository;
+    @Autowired
+    RentalRepository rentalRepository;
 
     public List<Book> getAllBooks() {
         return bookRepository.findAll()
@@ -46,6 +49,9 @@ public class BookService {
     public void deleteBook(Integer id){
         try {
             bookRepository.deleteById(id);
+//            rentalRepository.findAll().stream()
+//                    .filter(rental -> rental.getItemId() == id)
+//                    .forEach(rental -> rentalRepository.delete(rental));
         }
         catch(Exception e){
             e.printStackTrace();

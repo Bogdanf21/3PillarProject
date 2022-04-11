@@ -4,7 +4,7 @@ package spring.fiipractic.demo.Services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import spring.fiipractic.demo.Repositories.ComicBookRepository;
-import spring.fiipractic.demo.models.Book;
+import spring.fiipractic.demo.Repositories.RentalRepository;
 import spring.fiipractic.demo.models.ComicBook;
 
 import java.util.List;
@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 public class ComicBookService {
     @Autowired
     ComicBookRepository comicBookRepository;
+    @Autowired
+    RentalRepository rentalRepository;
 
 
     public List<ComicBook> getAllComicBooks() {
@@ -64,6 +66,9 @@ public class ComicBookService {
     public void deleteComicBook(Integer id) {
         try{
             comicBookRepository.deleteById(id);
+//            rentalRepository.findAll().stream()
+//                    .filter(rental -> rental.getItemId() == id)
+//                    .forEach(rental -> rentalRepository.delete(rental));
         }
         catch(Exception e){
             e.printStackTrace();
